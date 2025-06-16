@@ -4,13 +4,17 @@ const Building = require("../models/Building");
 
 // Create a new building
 router.post("/", async (req, res) => {
-  const { name, address } = req.body;
-  if (!name || !address) {
-    return res.status(400).json({ error: "Name and address are required" });
+  console.log("🔥 Incoming POST /api/buildings");
+  console.log("REQ BODY:", req.body);
+  console.log("Type of totalRooms:", typeof req.body.totalRooms);
+  console.log("Full Request:", JSON.stringify(req.body, null, 2));
+  const { name, address, totalRooms } = req.body;
+  if (!name || !address || totalRooms === undefined) {
+    return res.status(400).json({ error: "Name, address, and totalRooms are required" });
   }
 
   try {
-    const building = new Building({ name, address });
+    const building = new Building({ name, address, totalRooms });
     await building.save();
     res.status(201).json(building);
   } catch (err) {
