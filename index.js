@@ -4,6 +4,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+if (!process.env.MONGO_URI) {
+  console.error("❌ MONGO_URI is not set");
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 

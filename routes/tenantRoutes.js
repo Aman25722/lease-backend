@@ -1,3 +1,7 @@
+const Tenant = require("../models/tenant");
+const express = require("express");
+const router = express.Router();
+
 router.post("/", async (req, res) => {
   const { name, phone, roomId, rent, photoUrl, idUrl } = req.body;
 
@@ -14,3 +18,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Failed to save tenant" });
   }
 });
+
+module.exports = router;
