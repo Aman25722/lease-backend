@@ -19,4 +19,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/room/:roomId", async (req, res) => {
+  try {
+    const roomId = req.params.roomId;
+    const tenants = await Tenant.find({ roomId });
+    res.status(200).json(tenants);
+  } catch (error) {
+    console.error("Failed to fetch tenants by room ID:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;
