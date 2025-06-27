@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const building = new Building({ name, address, totalRooms });
+    const building = new Building({ name, address, totalRooms, occupiedRooms: 0 });
     await building.save();
     res.status(201).json(building);
   } catch (err) {
